@@ -1,3 +1,4 @@
+import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterConsultantFormWidget extends StatelessWidget {
@@ -5,22 +6,7 @@ class RegisterConsultantFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DropdownButtonFormField<String>(
-            isExpanded: true,
-            value: 'Recursos Humanos',
-            decoration: InputDecoration(
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-                labelText: "Tipo",
-                hintText: "Digite seu nome completo"),
-            items: <String>['Recursos Humanos', 'TI', 'Financeiro']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (_) {}),
+        CategorySelectWidget(),
         SizedBox(height: 12),
         TextFormField(
           controller: null,

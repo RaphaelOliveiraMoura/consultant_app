@@ -1,4 +1,4 @@
-import 'package:consultant_app/app/pages/register_page.dart';
+import 'package:consultant_app/app/pages/consultant_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
             buttonColor: Colors.green,
             textTheme: ButtonTextTheme.primary,
           )),
-      home: RegisterPage(),
+      home: ConsultantPage(),
     );
   }
 }

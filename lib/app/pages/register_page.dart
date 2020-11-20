@@ -1,5 +1,4 @@
 import 'package:consultant_app/app/components/register_form/register_consultant_form_widget.dart';
-import 'package:consultant_app/app/components/register_form/register_entrepreneur_form_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -19,7 +18,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 SizedBox(height: 26),
                 Text(
-                  'Categoria',
+                  'Tipo',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Row(
