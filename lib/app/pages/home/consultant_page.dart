@@ -1,4 +1,3 @@
-import 'package:consultant_app/app/components/bottom_navigaton/bottom_navigaton_widget.dart';
 import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/consultant_card/consultant_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,6 @@ class ConsultantPage extends StatelessWidget {
           ),
         )),
       ),
-      bottomNavigationBar: BottomNavigatonWidget(currentIndex: 1),
     );
   }
 }

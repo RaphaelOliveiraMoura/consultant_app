@@ -1,4 +1,3 @@
-import 'package:consultant_app/app/components/bottom_navigaton/bottom_navigaton_widget.dart';
 import 'package:flutter/material.dart';
 
 class AddContentPage extends StatelessWidget {
@@ -63,7 +62,6 @@ class AddContentPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigatonWidget(),
     );
   }
 }

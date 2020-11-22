@@ -1,4 +1,3 @@
-import 'package:consultant_app/app/components/bottom_navigaton/bottom_navigaton_widget.dart';
 import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/content_card/content_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,6 @@ class ExplorerPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigatonWidget(),
     );
   }
 }

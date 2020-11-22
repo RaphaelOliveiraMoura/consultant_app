@@ -1,4 +1,6 @@
-import 'package:consultant_app/app/pages/add_content_page.dart';
+import 'package:consultant_app/app/pages/home/home_page.dart';
+import 'package:consultant_app/app/pages/login/login_page.dart';
+import 'package:consultant_app/app/pages/register/register_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -13,7 +15,12 @@ class App extends StatelessWidget {
             buttonColor: Colors.green,
             textTheme: ButtonTextTheme.primary,
           )),
-      home: AddContentPage(),
+      initialRoute: '/login',
+      routes: {
+        '/': (context) => HomePage(),
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+      },
     );
   }
 }

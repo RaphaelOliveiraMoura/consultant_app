@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  Future checkAuth() async {
+    try {
+      var sharedPreferencesInstance = await SharedPreferences.getInstance();
+
+      bool isLoggedIn = sharedPreferencesInstance.getBool('isLoggedIn');
+
+      if (isLoggedIn) {
+        Navigator.of(context).pushReplacementNamed('/');
+      }
+    } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuth();
+  }
+
   @override
   Widget build(BuildContext context) {
     final focus = FocusNode();

@@ -1,4 +1,3 @@
-import 'package:consultant_app/app/components/bottom_navigaton/bottom_navigaton_widget.dart';
 import 'package:consultant_app/app/components/rating_card/rating_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +41,6 @@ class RatingPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigatonWidget(currentIndex: 2),
     );
   }
 }
