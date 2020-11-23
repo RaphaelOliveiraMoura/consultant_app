@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 
 const app = require('../src/app');
-const Consultant = require('../src/models/Consultant');
+const { consultants } = require('../src/models/Consultant');
 
 jest.mock('../src/models/Consultant', () =>
   jest.requireActual('../src/models/Consultant.mock')
@@ -9,13 +9,13 @@ jest.mock('../src/models/Consultant', () =>
 
 describe('Consultant', () => {
   beforeEach(() => {
-    Consultant.consultants.splice(0, Consultant.consultants);
+    consultants.splice(0, consultants.length);
   });
 
   it('should create a new consultant', async () => {
     const server = supertest(app);
 
-    expect(Consultant.consultants.length).toBe(0);
+    expect(consultants.length).toBe(0);
 
     const response = await server.post('/consultants').send({
       specialization: 'tecnology',
@@ -28,7 +28,25 @@ describe('Consultant', () => {
     expect(response.status).toBe(201);
     expect(response.body).toEqual({});
 
-    expect(Consultant.consultants.length).toBe(1);
-    expect(Consultant.consultants[0].name).toEqual('Raphael');
+    expect(consultants.length).toBe(1);
+    expect(consultants[0].name).toEqual('Raphael');
+  });
+
+  it('should list all consultants', async () => {
+    consultants.push({
+      specialization: 'tecnology',
+      name: 'Teste',
+      email: 'teste@gmail.com',
+      password: '123',
+    });
+
+    const server = supertest(app);
+
+    const response = await server.get('/consultants');
+
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBeTruthy();
+    expect(response.body[0].email).toBe('teste@gmail.com');
+    expect(response.body[0].specialization).toBe('tecnology');
   });
 });

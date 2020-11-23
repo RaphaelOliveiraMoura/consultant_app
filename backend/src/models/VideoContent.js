@@ -1,5 +1,8 @@
-async function listAll() {}
+async function findAll() {}
+
+async function create() {}
 
 module.exports = {
-  listAll,
+  findAll,
+  create,
 };
