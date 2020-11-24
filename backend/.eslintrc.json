@@ -9,6 +9,7 @@
   "plugins": ["prettier"],
   "parserOptions": {},
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "camelcase": "off"
   }
 }

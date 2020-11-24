@@ -30,9 +30,10 @@ describe('Consultant', () => {
 
     consultants.push(consultant);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/consultants/auth').send({
+    const response = await api.post('/consultants/auth').send({
       email: 'teste@mail.com',
       password: '123',
     });
@@ -55,9 +56,10 @@ describe('Consultant', () => {
 
     consultants.push(consultant);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/consultants/auth').send({
+    const response = await api.post('/consultants/auth').send({
       email: 'teste@mail.com',
       password: '1234',
     });
@@ -76,9 +78,10 @@ describe('Consultant', () => {
 
     consultants.push(consultant);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/consultants/auth').send({
+    const response = await api.post('/consultants/auth').send({
       email: 'invalid@mail.com',
       password: '1234',
     });
@@ -96,9 +99,10 @@ describe('Consultant', () => {
 
     entrepreneurs.push(entrepreneur);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/entrepreneurs/auth').send({
+    const response = await api.post('/entrepreneurs/auth').send({
       email: 'entrepreneur@mail.com',
       password: '12345',
     });
@@ -119,9 +123,10 @@ describe('Consultant', () => {
 
     entrepreneurs.push(entrepreneur);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/entrepreneurs/auth').send({
+    const response = await api.post('/entrepreneurs/auth').send({
       email: 'entrepreneur@mail.com',
       password: '1111',
     });
@@ -139,9 +144,10 @@ describe('Consultant', () => {
 
     entrepreneurs.push(entrepreneur);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.post('/entrepreneurs/auth').send({
+    const response = await api.post('/entrepreneurs/auth').send({
       email: 'random@mail.com',
       password: '1111',
     });

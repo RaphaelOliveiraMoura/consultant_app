@@ -1,9 +1,17 @@
 const yup = require('yup');
 
+exports.index = (req, res, next) => {
+  if (req.header.authorization) {
+    return res.status(400).json({ error: 'invalid_authorization' });
+  }
+
+  return next();
+};
+
 exports.update = (req, res, next) => {
   const bodySchema = yup.object().shape({
-    questionId: yup.string().required(),
-    rating: yup.string().required(),
+    questionId: yup.number().required(),
+    rating: yup.number().required(),
   });
 
   try {

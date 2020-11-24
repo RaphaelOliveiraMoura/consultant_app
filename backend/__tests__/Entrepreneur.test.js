@@ -13,11 +13,12 @@ describe('Entrepreneur', () => {
   });
 
   it('should create a entrepreneur', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(entrepreneurs.length).toBe(0);
 
-    const response = await server.post('/entrepreneurs').send({
+    const response = await api.post('/entrepreneurs').send({
       email: 'raphael@gmail.com',
       password: '123',
       confirmPassword: '123',
@@ -31,11 +32,12 @@ describe('Entrepreneur', () => {
   });
 
   it('should get error creating entrepreneur with mismatch confirm password', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(entrepreneurs.length).toBe(0);
 
-    const response = await server.post('/entrepreneurs').send({
+    const response = await api.post('/entrepreneurs').send({
       email: 'raphael@gmail.com',
       password: '123',
       confirmPassword: '1234',
@@ -46,11 +48,12 @@ describe('Entrepreneur', () => {
   });
 
   it('should get error creating entrepreneur with empty payload', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(entrepreneurs.length).toBe(0);
 
-    const response = await server.post('/entrepreneurs').send({});
+    const response = await api.post('/entrepreneurs').send({});
 
     expect(response.status).toBe(400);
     expect(response.body.error).toEqual('invalid_payload');

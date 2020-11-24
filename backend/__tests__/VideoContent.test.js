@@ -35,9 +35,10 @@ describe('Video Content', () => {
       description: 'Description',
     });
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.get('/explorer');
+    const response = await api.get('/explorer');
 
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body)).toBeTruthy();
@@ -56,9 +57,10 @@ describe('Video Content', () => {
 
     consultants.push(consultant);
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server
+    const response = await api
       .post('/videos')
       .set('Authorization', consultant.id)
       .send({

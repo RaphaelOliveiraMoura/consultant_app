@@ -13,11 +13,12 @@ describe('Consultant', () => {
   });
 
   it('should create a new consultant', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(consultants.length).toBe(0);
 
-    const response = await server.post('/consultants').send({
+    const response = await api.post('/consultants').send({
       specialization: 'tecnology',
       name: 'Raphael',
       email: 'raphael@gmail.com',
@@ -33,11 +34,12 @@ describe('Consultant', () => {
   });
 
   it('should get error creating a consultant with invalid confirm password match', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(consultants.length).toBe(0);
 
-    const response = await server.post('/consultants').send({
+    const response = await api.post('/consultants').send({
       specialization: 'tecnology',
       name: 'Raphael',
       email: 'raphael@gmail.com',
@@ -50,11 +52,12 @@ describe('Consultant', () => {
   });
 
   it('should get error creating a consultant with empty payload', async () => {
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(consultants.length).toBe(0);
 
-    const response = await server.post('/consultants').send({});
+    const response = await api.post('/consultants').send({});
 
     expect(response.status).toBe(400);
     expect(response.body.error).toEqual('invalid_payload');
@@ -68,9 +71,10 @@ describe('Consultant', () => {
       password: '123',
     });
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server.get('/consultants');
+    const response = await api.get('/consultants');
 
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body)).toBeTruthy();

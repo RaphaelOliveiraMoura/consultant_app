@@ -57,9 +57,10 @@ describe('Consultant', () => {
       { id: 3, title: 'Question3' }
     );
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server
+    const response = await api
       .get('/consultants/ratings')
       .set('Authorization', consultant.id);
 
@@ -104,9 +105,10 @@ describe('Consultant', () => {
       }
     );
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
-    const response = await server
+    const response = await api
       .get('/consultants/ratings')
       .set('Authorization', consultant.id);
 
@@ -138,11 +140,12 @@ describe('Consultant', () => {
       { id: 3, title: 'Question3' }
     );
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(ratingsConsultant.length).toBe(0);
 
-    const response = await server
+    const response = await api
       .put('/consultants/ratings')
       .set('Authorization', consultant.id)
       .send({
@@ -181,12 +184,13 @@ describe('Consultant', () => {
       questionId: 1,
       rating: 5,
     });
+    const server = await app.createServer();
 
-    const server = supertest(app);
+    const api = supertest(server);
 
     expect(ratingsConsultant.length).toBe(1);
 
-    const response = await server
+    const response = await api
       .put('/consultants/ratings')
       .set('Authorization', consultant.id)
       .send({
@@ -218,10 +222,11 @@ describe('Consultant', () => {
       { id: 2, title: 'Question2' },
       { id: 3, title: 'Question3' }
     );
+    const server = await app.createServer();
 
-    const server = supertest(app);
+    const api = supertest(server);
 
-    const response = await server
+    const response = await api
       .get('/entrepreneurs/ratings')
       .set('Authorization', entrepreneur.id);
 
@@ -265,10 +270,11 @@ describe('Consultant', () => {
         rating: 1,
       }
     );
+    const server = await app.createServer();
 
-    const server = supertest(app);
+    const api = supertest(server);
 
-    const response = await server
+    const response = await api
       .get('/entrepreneurs/ratings')
       .set('Authorization', entrepreneur.id);
 
@@ -300,11 +306,12 @@ describe('Consultant', () => {
       { id: 3, title: 'Question3' }
     );
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(ratingsEntrepreneur.length).toBe(0);
 
-    const response = await server
+    const response = await api
       .put('/entrepreneurs/ratings')
       .set('Authorization', entrepreneur.id)
       .send({
@@ -344,11 +351,12 @@ describe('Consultant', () => {
       rating: 5,
     });
 
-    const server = supertest(app);
+    const server = await app.createServer();
+    const api = supertest(server);
 
     expect(ratingsEntrepreneur.length).toBe(1);
 
-    const response = await server
+    const response = await api
       .put('/entrepreneurs/ratings')
       .set('Authorization', entrepreneur.id)
       .send({

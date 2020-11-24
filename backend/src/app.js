@@ -1,9 +1,17 @@
 const express = require('express');
+
 const routes = require('./routes');
+const database = require('./database');
 
-const app = express();
+async function createServer() {
+  const app = express();
 
-app.use(express.json());
-app.use(routes);
+  await database.init();
 
-module.exports = app;
+  app.use(express.json());
+  app.use(routes);
+
+  return app;
+}
+
+module.exports = { createServer };
