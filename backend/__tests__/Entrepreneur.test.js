@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 
 const app = require('../src/app');
-const Entrepreneur = require('../src/models/Entrepreneur');
+const { entrepreneurs } = require('../src/models/Entrepreneur');
 
 jest.mock('../src/models/Entrepreneur', () =>
   jest.requireActual('../src/models/Entrepreneur.mock')
@@ -9,13 +9,13 @@ jest.mock('../src/models/Entrepreneur', () =>
 
 describe('Entrepreneur', () => {
   beforeEach(() => {
-    Entrepreneur.entrepreneurs.splice(0, Entrepreneur.entrepreneurs);
+    entrepreneurs.splice(0, entrepreneurs.length);
   });
 
   it('should create a entrepreneur', async () => {
     const server = supertest(app);
 
-    expect(Entrepreneur.entrepreneurs.length).toBe(0);
+    expect(entrepreneurs.length).toBe(0);
 
     const response = await server.post('/entrepreneurs').send({
       email: 'raphael@gmail.com',
@@ -26,7 +26,33 @@ describe('Entrepreneur', () => {
     expect(response.status).toBe(201);
     expect(response.body).toEqual({});
 
-    expect(Entrepreneur.entrepreneurs.length).toBe(1);
-    expect(Entrepreneur.entrepreneurs[0].email).toEqual('raphael@gmail.com');
+    expect(entrepreneurs.length).toBe(1);
+    expect(entrepreneurs[0].email).toEqual('raphael@gmail.com');
+  });
+
+  it('should get error creating entrepreneur with mismatch confirm password', async () => {
+    const server = supertest(app);
+
+    expect(entrepreneurs.length).toBe(0);
+
+    const response = await server.post('/entrepreneurs').send({
+      email: 'raphael@gmail.com',
+      password: '123',
+      confirmPassword: '1234',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual('password_mismatch');
+  });
+
+  it('should get error creating entrepreneur with empty payload', async () => {
+    const server = supertest(app);
+
+    expect(entrepreneurs.length).toBe(0);
+
+    const response = await server.post('/entrepreneurs').send({});
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual('invalid_payload');
   });
 });

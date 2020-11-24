@@ -1,5 +1,7 @@
-const RatingQuestion = require('../models/RatingQuestion');
-const RatingConsultant = require('../models/RatingConsultant');
+const validator = require('./validator');
+
+const RatingQuestion = require('../../models/RatingQuestion');
+const RatingConsultant = require('../../models/RatingConsultant');
 
 exports.index = async (req, res) => {
   const consultantId = req.headers.authorization;
@@ -22,15 +24,18 @@ exports.index = async (req, res) => {
   return res.json(ratings);
 };
 
-exports.update = async (req, res) => {
-  const consultantId = req.headers.authorization;
-  const { questionId, rating } = req.body;
+exports.update = [
+  validator.update,
+  async (req, res) => {
+    const consultantId = req.headers.authorization;
+    const { questionId, rating } = req.body;
 
-  await RatingConsultant.upsert({
-    consultantId,
-    questionId,
-    rating,
-  });
+    await RatingConsultant.upsert({
+      consultantId,
+      questionId,
+      rating,
+    });
 
-  return res.send();
-};
+    return res.send();
+  },
+];

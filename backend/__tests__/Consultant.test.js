@@ -32,6 +32,34 @@ describe('Consultant', () => {
     expect(consultants[0].name).toEqual('Raphael');
   });
 
+  it('should get error creating a consultant with invalid confirm password match', async () => {
+    const server = supertest(app);
+
+    expect(consultants.length).toBe(0);
+
+    const response = await server.post('/consultants').send({
+      specialization: 'tecnology',
+      name: 'Raphael',
+      email: 'raphael@gmail.com',
+      password: '123',
+      confirmPassword: '1234',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual('password_mismatch');
+  });
+
+  it('should get error creating a consultant with empty payload', async () => {
+    const server = supertest(app);
+
+    expect(consultants.length).toBe(0);
+
+    const response = await server.post('/consultants').send({});
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual('invalid_payload');
+  });
+
   it('should list all consultants', async () => {
     consultants.push({
       specialization: 'tecnology',
