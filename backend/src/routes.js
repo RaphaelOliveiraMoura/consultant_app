@@ -6,6 +6,7 @@ const VideoContentController = require('./controllers/VideoContentController');
 const AuthConsultantController = require('./controllers/AuthConsultantController');
 const AuthEntrepreneurController = require('./controllers/AuthEntrepreneurController');
 const RatingConsultantController = require('./controllers/RatingConsultantController');
+const RatingEntrepreneurController = require('./controllers/RatingEntrepreneurController');
 
 const routes = Router();
 
@@ -22,5 +23,8 @@ routes.post('/videos', VideoContentController.store);
 
 routes.get('/consultants/ratings', RatingConsultantController.index);
 routes.put('/consultants/ratings', RatingConsultantController.update);
+
+routes.get('/entrepreneurs/ratings', RatingEntrepreneurController.index);
+routes.put('/entrepreneurs/ratings', RatingEntrepreneurController.update);
 
 module.exports = routes;
