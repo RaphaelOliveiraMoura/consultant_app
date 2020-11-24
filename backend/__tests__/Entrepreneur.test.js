@@ -1,10 +1,10 @@
 const supertest = require('supertest');
 
 const app = require('../src/app');
-const { entrepreneurs } = require('../src/models/Entrepreneur');
+const { entrepreneurs } = require('../src/repositories/Entrepreneur');
 
-jest.mock('../src/models/Entrepreneur', () =>
-  jest.requireActual('../src/models/Entrepreneur.mock')
+jest.mock('../src/repositories/Entrepreneur', () =>
+  jest.requireActual('../src/repositories/Entrepreneur.mock')
 );
 
 describe('Entrepreneur', () => {

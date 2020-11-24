@@ -2,15 +2,15 @@ const supertest = require('supertest');
 const { v4: uuid } = require('uuid');
 
 const app = require('../src/app');
-const { consultants } = require('../src/models/Consultant');
-const { entrepreneurs } = require('../src/models/Entrepreneur');
+const { consultants } = require('../src/repositories/Consultant');
+const { entrepreneurs } = require('../src/repositories/Entrepreneur');
 
-jest.mock('../src/models/Consultant', () =>
-  jest.requireActual('../src/models/Consultant.mock')
+jest.mock('../src/repositories/Consultant', () =>
+  jest.requireActual('../src/repositories/Consultant.mock')
 );
 
-jest.mock('../src/models/Entrepreneur', () =>
-  jest.requireActual('../src/models/Entrepreneur.mock')
+jest.mock('../src/repositories/Entrepreneur', () =>
+  jest.requireActual('../src/repositories/Entrepreneur.mock')
 );
 
 describe('Consultant', () => {

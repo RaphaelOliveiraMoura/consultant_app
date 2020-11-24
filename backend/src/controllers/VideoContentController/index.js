@@ -1,5 +1,5 @@
 const validator = require('./validator');
-const VideoContent = require('../../models/VideoContent');
+const VideoContent = require('../../repositories/VideoContent');
 
 exports.index = async (_req, res) => {
   const videoContentList = await VideoContent.findAll();

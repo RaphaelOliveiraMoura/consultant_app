@@ -1,5 +1,5 @@
 const validator = require('./validator');
-const Consultant = require('../../models/Consultant');
+const Consultant = require('../../repositories/Consultant');
 
 exports.index = async (_req, res) => {
   const consultants = await Consultant.findAll();

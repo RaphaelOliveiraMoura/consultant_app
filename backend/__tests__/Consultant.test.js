@@ -1,10 +1,10 @@
 const supertest = require('supertest');
 
 const app = require('../src/app');
-const { consultants } = require('../src/models/Consultant');
+const { consultants } = require('../src/repositories/Consultant');
 
-jest.mock('../src/models/Consultant', () =>
-  jest.requireActual('../src/models/Consultant.mock')
+jest.mock('../src/repositories/Consultant', () =>
+  jest.requireActual('../src/repositories/Consultant.mock')
 );
 
 describe('Consultant', () => {

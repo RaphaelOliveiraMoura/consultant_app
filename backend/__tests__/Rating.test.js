@@ -4,32 +4,32 @@ const { v4: uuid } = require('uuid');
 const app = require('../src/app');
 const {
   ratings: ratingsConsultant,
-} = require('../src/models/RatingConsultant');
+} = require('../src/repositories/RatingConsultant');
 const {
   ratings: ratingsEntrepreneur,
-} = require('../src/models/RatingEntrepreneur');
-const { questions } = require('../src/models/RatingQuestion');
-const { consultants } = require('../src/models/Consultant');
-const { entrepreneurs } = require('../src/models/Entrepreneur');
+} = require('../src/repositories/RatingEntrepreneur');
+const { questions } = require('../src/repositories/RatingQuestion');
+const { consultants } = require('../src/repositories/Consultant');
+const { entrepreneurs } = require('../src/repositories/Entrepreneur');
 
-jest.mock('../src/models/RatingQuestion', () =>
-  jest.requireActual('../src/models/RatingQuestion.mock')
+jest.mock('../src/repositories/RatingQuestion', () =>
+  jest.requireActual('../src/repositories/RatingQuestion.mock')
 );
 
-jest.mock('../src/models/RatingConsultant', () =>
-  jest.requireActual('../src/models/RatingConsultant.mock')
+jest.mock('../src/repositories/RatingConsultant', () =>
+  jest.requireActual('../src/repositories/RatingConsultant.mock')
 );
 
-jest.mock('../src/models/RatingEntrepreneur', () =>
-  jest.requireActual('../src/models/RatingEntrepreneur.mock')
+jest.mock('../src/repositories/RatingEntrepreneur', () =>
+  jest.requireActual('../src/repositories/RatingEntrepreneur.mock')
 );
 
-jest.mock('../src/models/Consultant', () =>
-  jest.requireActual('../src/models/Consultant.mock')
+jest.mock('../src/repositories/Consultant', () =>
+  jest.requireActual('../src/repositories/Consultant.mock')
 );
 
-jest.mock('../src/models/Entrepreneur', () =>
-  jest.requireActual('../src/models/Entrepreneur.mock')
+jest.mock('../src/repositories/Entrepreneur', () =>
+  jest.requireActual('../src/repositories/Entrepreneur.mock')
 );
 
 describe('Consultant', () => {

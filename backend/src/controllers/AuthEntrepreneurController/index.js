@@ -1,5 +1,5 @@
 const validator = require('./validator');
-const Entrepreneur = require('../../models/Entrepreneur');
+const Entrepreneur = require('../../repositories/Entrepreneur');
 
 exports.store = [
   validator.store,

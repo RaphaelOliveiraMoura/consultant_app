@@ -2,15 +2,15 @@ const supertest = require('supertest');
 const { v4: uuid } = require('uuid');
 
 const app = require('../src/app');
-const { videoContentList } = require('../src/models/VideoContent');
-const { consultants } = require('../src/models/Consultant');
+const { videoContentList } = require('../src/repositories/VideoContent');
+const { consultants } = require('../src/repositories/Consultant');
 
-jest.mock('../src/models/VideoContent', () =>
-  jest.requireActual('../src/models/VideoContent.mock')
+jest.mock('../src/repositories/VideoContent', () =>
+  jest.requireActual('../src/repositories/VideoContent.mock')
 );
 
-jest.mock('../src/models/Consultant', () =>
-  jest.requireActual('../src/models/Consultant.mock')
+jest.mock('../src/repositories/Consultant', () =>
+  jest.requireActual('../src/repositories/Consultant.mock')
 );
 
 describe('Video Content', () => {

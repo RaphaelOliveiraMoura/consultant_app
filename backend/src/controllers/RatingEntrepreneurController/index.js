@@ -1,7 +1,7 @@
 const validator = require('./validator');
 
-const RatingQuestion = require('../../models/RatingQuestion');
-const RatingEntrepreneur = require('../../models/RatingEntrepreneur');
+const RatingQuestion = require('../../repositories/RatingQuestion');
+const RatingEntrepreneur = require('../../repositories/RatingEntrepreneur');
 
 exports.index = async (req, res) => {
   const entrepreneurId = req.headers.authorization;
