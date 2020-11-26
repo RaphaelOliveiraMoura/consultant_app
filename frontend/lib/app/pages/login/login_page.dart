@@ -67,13 +67,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 26),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/');
+                  },
                   child: Text('LOGIN'),
                 ),
                 SizedBox(height: 34),
                 Text('Não é cadastrado ?'),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/register');
+                  },
                   child: Text('CADASTRE-SE'),
                   color: Colors.greenAccent,
                 )

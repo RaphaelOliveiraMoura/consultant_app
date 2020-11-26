@@ -1,11 +1,31 @@
+import 'package:consultant_app/app/pages/register/register_page.dart';
 import 'package:flutter/material.dart';
 
-class RegisterEntrepreneurFormWidget extends StatelessWidget {
+class RegisterEntrepreneurFormWidget extends StatefulWidget {
+  final EntrepreneurFormData entrepreneurFormData;
+
+  RegisterEntrepreneurFormWidget(this.entrepreneurFormData);
+
+  @override
+  _RegisterEntrepreneurFormWidgetState createState() =>
+      _RegisterEntrepreneurFormWidgetState(entrepreneurFormData);
+}
+
+class _RegisterEntrepreneurFormWidgetState
+    extends State<RegisterEntrepreneurFormWidget> {
+  EntrepreneurFormData entrepreneurFormData;
+
+  _RegisterEntrepreneurFormWidgetState(this.entrepreneurFormData);
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       TextFormField(
-        controller: null,
+        onChanged: (value) => {
+          setState(() {
+            entrepreneurFormData.email = value;
+          })
+        },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
@@ -14,7 +34,11 @@ class RegisterEntrepreneurFormWidget extends StatelessWidget {
       ),
       SizedBox(height: 12),
       TextFormField(
-        controller: null,
+        onChanged: (value) => {
+          setState(() {
+            entrepreneurFormData.password = value;
+          })
+        },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
@@ -23,7 +47,11 @@ class RegisterEntrepreneurFormWidget extends StatelessWidget {
       ),
       SizedBox(height: 12),
       TextFormField(
-        controller: null,
+        onChanged: (value) => {
+          setState(() {
+            entrepreneurFormData.confirmPassword = value;
+          })
+        },
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             labelText: "Confirmar senha",

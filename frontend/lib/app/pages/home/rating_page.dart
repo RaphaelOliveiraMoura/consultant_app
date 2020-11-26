@@ -5,7 +5,17 @@ class RatingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Avalie')),
+      appBar: AppBar(title: Text('Avalie'), actions: [
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed('/login');
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.exit_to_app, size: 26.0),
+          ),
+        )
+      ]),
       body: Container(
         child: SingleChildScrollView(
           child: Padding(

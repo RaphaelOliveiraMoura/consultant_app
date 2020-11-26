@@ -14,7 +14,6 @@ class ContentCardWidget extends StatelessWidget {
     initialVideoId: 'HgfL3MMrvzM',
     flags: YoutubePlayerFlags(
       autoPlay: false,
-      mute: true,
     ),
   );
 

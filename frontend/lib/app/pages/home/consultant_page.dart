@@ -8,7 +8,9 @@ class ConsultantPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Consultores'), actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed('/login');
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(Icons.exit_to_app, size: 26.0),
