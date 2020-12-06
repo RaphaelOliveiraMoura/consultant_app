@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ConsultantCardWidget extends StatelessWidget {
-  final String name = 'Raphael de Oliveira';
-  final String email = 'raphaeldeoliveira@gmail.com';
-  final String category = 'Tecnologia';
+  final data;
+
+  ConsultantCardWidget(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,10 @@ class ConsultantCardWidget extends StatelessWidget {
                 ),
               ),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(name, style: TextStyle(fontSize: 18)),
-                Text(email),
-                Text(category, style: TextStyle(color: Colors.grey)),
+                Text(data['name'], style: TextStyle(fontSize: 18)),
+                Text(data['email']),
+                Text(data['specialization'],
+                    style: TextStyle(color: Colors.grey)),
                 SizedBox(height: 8),
                 Icon(Icons.video_library)
               ])

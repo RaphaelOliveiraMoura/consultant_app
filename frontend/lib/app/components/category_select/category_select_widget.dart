@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CategorySelectWidget extends StatelessWidget {
+  final onChanged;
+
+  CategorySelectWidget({this.onChanged});
+
   final List<String> categoryOptions = [
     'Recursos Humanos',
     'Tecnologia',
@@ -22,6 +26,6 @@ class CategorySelectWidget extends StatelessWidget {
             child: Text(value),
           );
         }).toList(),
-        onChanged: (_) {});
+        onChanged: onChanged);
   }
 }

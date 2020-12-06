@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ContentCardWidget extends StatelessWidget {
-  final String category = 'Tecnologia';
-  final String youtubeUrl = 'https://youtube.com';
-  final String title =
-      'Musicas para ouvir no Trabalho - Músicas para animar o trabalho - Música para trabalhar 2020';
-  final String description =
-      'Musicas para ouvir no Trabalho - Músicas para animar o trabalho - Música para trabalhar 2020';
+  final data;
+  final YoutubePlayerController _youtubeVideoController;
 
-  final YoutubePlayerController _youtubeVideoController =
-      YoutubePlayerController(
-    initialVideoId: 'HgfL3MMrvzM',
-    flags: YoutubePlayerFlags(
-      autoPlay: false,
-    ),
-  );
+  ContentCardWidget(this.data)
+      : _youtubeVideoController = YoutubePlayerController(
+          initialVideoId: data['youtubeCode'],
+          flags: YoutubePlayerFlags(
+            autoPlay: false,
+          ),
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class ContentCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                child: Text(category),
+                child: Text(data['category']),
                 margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8)),
             YoutubePlayer(
               controller: _youtubeVideoController,
@@ -40,7 +36,7 @@ class ContentCardWidget extends StatelessWidget {
               padding:
                   const EdgeInsets.only(left: 8, top: 4, bottom: 2, right: 8),
               child: Text(
-                title,
+                data['title'],
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
@@ -49,7 +45,7 @@ class ContentCardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8, bottom: 4, right: 8),
               child: Text(
-                description,
+                data['description'],
                 style: TextStyle(color: Colors.grey),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

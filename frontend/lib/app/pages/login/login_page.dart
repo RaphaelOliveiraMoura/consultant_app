@@ -27,9 +27,13 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     final focus = FocusNode();
 
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         child: SingleChildScrollView(
           child: Padding(
@@ -37,10 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                 const EdgeInsets.only(top: 66, left: 26, right: 26, bottom: 12),
             child: Column(
               children: [
-                Image.network(
-                  'https://images.vexels.com/media/users/3/156177/isolated/preview/7f4abdb379d195b2fd525d0bf5f303a5-l--mpada-com-sol-dentro-do---cone-by-vexels.png',
-                  width: 136,
-                ),
+                Image.asset('assets/logo.png', width: 136),
                 SizedBox(height: 42),
                 TextFormField(
                   controller: null,
@@ -76,7 +77,17 @@ class _LoginPageState extends State<LoginPage> {
                 Text('Não é cadastrado ?'),
                 RaisedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/register');
+                    Navigator.of(context)
+                        .pushNamed('/register')
+                        .then((createdMessage) {
+                      if (createdMessage is String) {
+                        final snackBar = SnackBar(
+                            content: Text(createdMessage),
+                            backgroundColor: Colors.green);
+
+                        _scaffoldKey.currentState.showSnackBar(snackBar);
+                      }
+                    });
                   },
                   child: Text('CADASTRE-SE'),
                   color: Colors.greenAccent,

@@ -1,8 +1,27 @@
 import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/consultant_card/consultant_card_widget.dart';
+import 'package:consultant_app/app/services/consultant_service.dart';
 import 'package:flutter/material.dart';
 
-class ConsultantPage extends StatelessWidget {
+class ConsultantPage extends StatefulWidget {
+  @override
+  _ConsultantPageState createState() => _ConsultantPageState();
+}
+
+class _ConsultantPageState extends State<ConsultantPage> {
+  List consultants = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    ConsultantService.getAll().then((result) {
+      setState(() {
+        consultants = result;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,22 +37,23 @@ class ConsultantPage extends StatelessWidget {
         )
       ]),
       body: Container(
-        child: SingleChildScrollView(
-            child: Padding(
+        child: Padding(
           padding:
               const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
           child: Column(
             children: [
               CategorySelectWidget(),
-              ConsultantCardWidget(),
-              ConsultantCardWidget(),
-              ConsultantCardWidget(),
-              ConsultantCardWidget(),
-              ConsultantCardWidget(),
-              ConsultantCardWidget(),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (ctx, index) =>
+                      ConsultantCardWidget(consultants[index]),
+                  itemCount: consultants.length,
+                ),
+              )
             ],
           ),
-        )),
+        ),
       ),
     );
   }
