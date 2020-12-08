@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 class RatingCardWidget extends StatelessWidget {
   final String question;
+  final int initialRating;
+  final onRatingUpdate;
 
-  const RatingCardWidget({Key key, this.question}) : super(key: key);
+  const RatingCardWidget(
+      {Key key, this.question, this.initialRating, this.onRatingUpdate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +21,17 @@ class RatingCardWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           RatingBar.builder(
-            initialRating: 3,
+            initialRating: initialRating.toDouble(),
             minRating: 1,
             direction: Axis.horizontal,
-            allowHalfRating: true,
+            allowHalfRating: false,
             itemCount: 5,
             itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => Icon(
               Icons.star,
               color: Colors.amber,
             ),
-            onRatingUpdate: (rating) {
-              print(rating);
-            },
+            onRatingUpdate: onRatingUpdate,
           ),
           SizedBox(height: 26)
         ],

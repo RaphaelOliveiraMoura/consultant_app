@@ -8,7 +8,7 @@ class ExplorerService {
   static getVideoContent() async {
     var response = await http.get('${ServiceUtils.apiUrl}/explorer');
 
-    print(response.statusCode == 200);
+    catchError(response.statusCode);
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body).map((videoContent) {
@@ -22,17 +22,6 @@ class ExplorerService {
           'description': videoContent['description']
         };
       }).toList();
-    }
-
-    switch (response.statusCode) {
-      case 404:
-        throw new HttpError(type: HttpErrorTypes.serverNotFound);
-      case 401:
-        throw new HttpError(type: HttpErrorTypes.unauthorized);
-      case 400:
-        throw new HttpError(type: HttpErrorTypes.invalidPayload);
-      default:
-        throw new HttpError(type: HttpErrorTypes.unhandledError);
     }
   }
 }

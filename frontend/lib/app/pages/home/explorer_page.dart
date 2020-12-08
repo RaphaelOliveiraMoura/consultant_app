@@ -1,6 +1,7 @@
 import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/content_card/content_card_widget.dart';
 import 'package:consultant_app/app/services/explorer_service.dart';
+import 'package:consultant_app/app/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 class ExplorerPage extends StatefulWidget {
@@ -28,7 +29,9 @@ class _ExplorerPageState extends State<ExplorerPage> {
       appBar: AppBar(title: Text('Explorar'), actions: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).pushReplacementNamed('/login');
+            LoginService.logout().then((result) {
+              Navigator.of(context).pushReplacementNamed('/login');
+            });
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

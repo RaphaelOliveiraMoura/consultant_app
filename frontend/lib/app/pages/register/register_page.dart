@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 children: [
                   Image.asset('assets/empreendedor.png', width: 180),
-                  SizedBox(height: 26),
+                  SizedBox(height: 4),
                   Text(
                     'Tipo',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

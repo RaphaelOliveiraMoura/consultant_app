@@ -16,19 +16,6 @@ class EntrepreneursService {
           "confirmPassword": entrepreneurFormData['confirmPassword']
         }));
 
-    if (response.statusCode == 201) {
-      return;
-    }
-
-    switch (response.statusCode) {
-      case 404:
-        throw new HttpError(type: HttpErrorTypes.serverNotFound);
-      case 401:
-        throw new HttpError(type: HttpErrorTypes.unauthorized);
-      case 400:
-        throw new HttpError(type: HttpErrorTypes.invalidPayload);
-      default:
-        throw new HttpError(type: HttpErrorTypes.unhandledError);
-    }
+    catchError(response.statusCode);
   }
 }

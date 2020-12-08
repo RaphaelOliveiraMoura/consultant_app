@@ -1,6 +1,6 @@
-import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/consultant_card/consultant_card_widget.dart';
 import 'package:consultant_app/app/services/consultant_service.dart';
+import 'package:consultant_app/app/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 class ConsultantPage extends StatefulWidget {
@@ -28,7 +28,9 @@ class _ConsultantPageState extends State<ConsultantPage> {
       appBar: AppBar(title: Text('Consultores'), actions: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).pushReplacementNamed('/login');
+            LoginService.logout().then((result) {
+              Navigator.of(context).pushReplacementNamed('/login');
+            });
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -42,7 +44,7 @@ class _ConsultantPageState extends State<ConsultantPage> {
               const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
           child: Column(
             children: [
-              CategorySelectWidget(),
+              // CategorySelectWidget(),
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
