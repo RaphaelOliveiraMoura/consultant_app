@@ -1,29 +1,24 @@
 import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/services/consultant_service.dart';
 import 'package:consultant_app/app/utils/http_error_utils.dart';
+import 'package:consultant_app/app/utils/validator_utils.dart';
 import 'package:flutter/material.dart';
 
 class RegisterConsultantFormWidget extends StatelessWidget {
   final form = GlobalKey<FormState>();
   final Map<String, Object> formData = {};
 
-  isRequired(String requiredMessage) {
-    return (value) {
-      if (value.isEmpty) {
-        return requiredMessage;
-      }
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
       key: form,
-      autovalidate: true,
+      autovalidate: false,
       child: Column(
         children: [
           CategorySelectWidget(
-              onChanged: (value) => formData['specialization'] = value),
+              value: formData['specialization'],
+              onChanged: (value) => formData['specialization'] = value,
+              validator: isRequired('Selecione uma categoria de atuação')),
           SizedBox(height: 12),
           TextFormField(
             onSaved: (value) => formData['name'] = value,
@@ -88,6 +83,8 @@ class RegisterConsultantFormWidget extends StatelessWidget {
                       'Erro ao se comunicar com o servidor!! Por favor verifique sua conexão com a internet',
                   HttpErrorTypes.unauthorized:
                       'Você não tem autorização para realizar essa ação, certifique que tem os acessos necessários para realizar essa operação',
+                  'email_already_exists':
+                      'Esse email já está em uso, verifique se digitou o email corretamente'
                 };
 
                 String snackBarErrorMessage = errorsMapping[e.type] ??

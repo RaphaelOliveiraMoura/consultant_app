@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 
 class CategorySelectWidget extends StatelessWidget {
+  final value;
   final onChanged;
+  final validator;
+  final bool allOptions;
 
-  CategorySelectWidget({this.onChanged});
+  CategorySelectWidget(
+      {this.value, this.onChanged, this.validator, this.allOptions = false});
 
   final List<String> categoryOptions = [
-    'Recursos Humanos',
     'Tecnologia',
-    'Financeiro'
+    'Recursos Humanos',
+    'Financeiro',
+    'Gestão financeira',
+    'Gestão de marketing',
+    'Logística',
+    'Planejamento estratégico',
+    'Vendas',
   ];
 
   @override
   Widget build(BuildContext context) {
+    if (allOptions && categoryOptions.indexOf('Todos') < 0) {
+      categoryOptions.insert(0, 'Todos');
+    }
+
     return DropdownButtonFormField<String>(
         isExpanded: true,
-        value: 'Recursos Humanos',
+        value: value,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             labelText: "Categoria",
@@ -26,6 +39,7 @@ class CategorySelectWidget extends StatelessWidget {
             child: Text(value),
           );
         }).toList(),
-        onChanged: onChanged);
+        onChanged: onChanged,
+        validator: validator);
   }
 }

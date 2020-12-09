@@ -18,6 +18,14 @@ class ConsultantService {
           "confirmPassword": consultantFormData['confirmPassword']
         }));
 
+    if (response.statusCode == 400) {
+      String error = jsonDecode(response.body)['error'];
+
+      if (error == 'email_already_exists') {
+        throw HttpError(type: 'email_already_exists');
+      }
+    }
+
     catchError(response.statusCode);
   }
 
@@ -28,7 +36,13 @@ class ConsultantService {
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body).map((consultant) {
+        String firstLetter = consultant['name'][0].toUpperCase();
+        String secondLetter = consultant['name'][1].toUpperCase();
+
+        String initials = '$firstLetter$secondLetter';
+
         return {
+          "initials": initials,
           "specialization": consultant['specialization'],
           "name": consultant['name'],
           "email": consultant['email'],

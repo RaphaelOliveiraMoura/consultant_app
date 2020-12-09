@@ -16,6 +16,14 @@ class EntrepreneursService {
           "confirmPassword": entrepreneurFormData['confirmPassword']
         }));
 
+    if (response.statusCode == 400) {
+      String error = jsonDecode(response.body)['error'];
+
+      if (error == 'email_already_exists') {
+        throw HttpError(type: 'email_already_exists');
+      }
+    }
+
     catchError(response.statusCode);
   }
 }

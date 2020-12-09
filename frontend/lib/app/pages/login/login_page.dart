@@ -1,4 +1,5 @@
 import 'package:consultant_app/app/services/login_service.dart';
+import 'package:consultant_app/app/utils/validator_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,14 +40,6 @@ class _LoginPageState extends State<LoginPage> {
 
     final form = GlobalKey<FormState>();
     final Map<String, Object> formData = {};
-
-    isRequired(String requiredMessage) {
-      return (value) {
-        if (value.isEmpty) {
-          return requiredMessage;
-        }
-      };
-    }
 
     return Scaffold(
       key: _scaffoldKey,

@@ -26,10 +26,8 @@ class ConsultantCardWidget extends StatelessWidget {
                         style: BorderStyle.solid,
                       )),
                   child: Center(
-                      child: Text(
-                    "RA",
-                    style: TextStyle(fontSize: 32),
-                  )),
+                      child: Text(data['initials'],
+                          style: TextStyle(fontSize: 32))),
                 ),
               ),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

@@ -1,5 +1,6 @@
 import 'package:consultant_app/app/services/login_service.dart';
 import 'package:consultant_app/app/services/video_content_service.dart';
+import 'package:consultant_app/app/utils/validator_utils.dart';
 import 'package:flutter/material.dart';
 
 class AddContentPage extends StatelessWidget {
@@ -7,14 +8,6 @@ class AddContentPage extends StatelessWidget {
 
   final form = GlobalKey<FormState>();
   final Map<String, Object> formData = {};
-
-  isRequired(String requiredMessage) {
-    return (value) {
-      if (value.isEmpty) {
-        return requiredMessage;
-      }
-    };
-  }
 
   @override
   Widget build(BuildContext context) {

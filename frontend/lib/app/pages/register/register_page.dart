@@ -15,7 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(title: Text('Cadastre-se')),
         body: Container(
           child: SingleChildScrollView(
             child: Padding(

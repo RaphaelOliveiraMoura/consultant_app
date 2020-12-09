@@ -11,6 +11,7 @@ class ExplorerPage extends StatefulWidget {
 
 class _ExplorerPageState extends State<ExplorerPage> {
   List videoContentList = [];
+  List filteredList = [];
 
   @override
   void initState() {
@@ -19,6 +20,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
     ExplorerService.getVideoContent().then((result) {
       setState(() {
         videoContentList = result;
+        filteredList = result;
       });
     });
   }
@@ -46,13 +48,26 @@ class _ExplorerPageState extends State<ExplorerPage> {
                 const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
             child: Column(
               children: [
-                CategorySelectWidget(),
+                CategorySelectWidget(
+                    allOptions: true,
+                    onChanged: (category) {
+                      setState(() {
+                        if (category == 'Todos') {
+                          filteredList = videoContentList;
+                          return;
+                        }
+
+                        filteredList = videoContentList
+                            .where((data) => data['category'] == category)
+                            .toList();
+                      });
+                    }),
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (ctx, index) =>
-                        ContentCardWidget(videoContentList[index]),
-                    itemCount: videoContentList.length,
+                        ContentCardWidget(filteredList[index]),
+                    itemCount: filteredList.length,
                   ),
                 )
               ],

@@ -44,7 +44,6 @@ class _ConsultantPageState extends State<ConsultantPage> {
               const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
           child: Column(
             children: [
-              // CategorySelectWidget(),
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,

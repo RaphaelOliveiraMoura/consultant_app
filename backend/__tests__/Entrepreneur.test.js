@@ -47,6 +47,26 @@ describe('Entrepreneur', () => {
     expect(response.body.error).toEqual('password_mismatch');
   });
 
+  it('should get error creating entrepreneur with already exists email', async () => {
+    const server = await app.createServer();
+    const api = supertest(server);
+
+    entrepreneurs.push({
+      name: 'Teste',
+      email: 'teste@gmail.com',
+      password: '123',
+    });
+
+    const response = await api.post('/entrepreneurs').send({
+      email: 'teste@gmail.com',
+      password: '123',
+      confirmPassword: '123',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body.error).toEqual('email_already_exists');
+  });
+
   it('should get error creating entrepreneur with empty payload', async () => {
     const server = await app.createServer();
     const api = supertest(server);

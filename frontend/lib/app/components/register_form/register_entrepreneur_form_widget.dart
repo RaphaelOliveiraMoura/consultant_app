@@ -1,5 +1,6 @@
 import 'package:consultant_app/app/services/entrepreneurs_service.dart';
 import 'package:consultant_app/app/utils/http_error_utils.dart';
+import 'package:consultant_app/app/utils/validator_utils.dart';
 import 'package:flutter/material.dart';
 
 class RegisterEntrepreneurFormWidget extends StatefulWidget {
@@ -13,19 +14,11 @@ class _RegisterEntrepreneurFormWidgetState
   final form = GlobalKey<FormState>();
   final Map<String, Object> formData = {};
 
-  isRequired(String requiredMessage) {
-    return (value) {
-      if (value.isEmpty) {
-        return requiredMessage;
-      }
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
       key: form,
-      autovalidate: true,
+      autovalidate: false,
       child: Column(children: [
         TextFormField(
           onSaved: (value) => formData['email'] = value,
@@ -79,6 +72,8 @@ class _RegisterEntrepreneurFormWidgetState
                     'Erro ao se comunicar com o servidor!! Por favor verifique sua conexão com a internet',
                 HttpErrorTypes.unauthorized:
                     'Você não tem autorização para realizar essa ação, certifique que tem os acessos necessários para realizar essa operação',
+                'email_already_exists':
+                    'Esse email já está em uso, verifique se digitou o email corretamente'
               };
 
               String snackBarErrorMessage = errorsMapping[e.type] ??
