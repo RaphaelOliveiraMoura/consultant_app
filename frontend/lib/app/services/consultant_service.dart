@@ -24,6 +24,10 @@ class ConsultantService {
       if (error == 'email_already_exists') {
         throw HttpError(type: 'email_already_exists');
       }
+
+      if (error == 'password_mismatch') {
+        throw HttpError(type: 'password_mismatch');
+      }
     }
 
     catchError(response.statusCode);

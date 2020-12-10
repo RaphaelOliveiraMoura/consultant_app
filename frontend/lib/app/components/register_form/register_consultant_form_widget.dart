@@ -33,7 +33,7 @@ class RegisterConsultantFormWidget extends StatelessWidget {
           SizedBox(height: 12),
           TextFormField(
             onSaved: (value) => formData['email'] = value,
-            validator: isRequired('O campo de email é obrigatório'),
+            validator: (value) => validateEmail(value),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 border:
@@ -57,7 +57,7 @@ class RegisterConsultantFormWidget extends StatelessWidget {
           TextFormField(
             obscureText: true,
             onSaved: (value) => formData['confirmPassword'] = value,
-            validator: isRequired('Digite sua senha corretamente'),
+            validator: isRequired('Digite sua senha'),
             decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
@@ -84,7 +84,9 @@ class RegisterConsultantFormWidget extends StatelessWidget {
                   HttpErrorTypes.unauthorized:
                       'Você não tem autorização para realizar essa ação, certifique que tem os acessos necessários para realizar essa operação',
                   'email_already_exists':
-                      'Esse email já está em uso, verifique se digitou o email corretamente'
+                      'Esse email já está em uso, verifique se digitou o email corretamente',
+                  'password_mismatch':
+                      'Senhas não correspondem, confirme se as senhas digitadas são iguais'
                 };
 
                 String snackBarErrorMessage = errorsMapping[e.type] ??

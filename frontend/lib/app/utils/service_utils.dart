@@ -1,3 +1,3 @@
 class ServiceUtils {
-  static String apiUrl = 'http://f191123467b0.ngrok.io';
+  static String apiUrl = 'https://23c93203decc.ngrok.io';
 }

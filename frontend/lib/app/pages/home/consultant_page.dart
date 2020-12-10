@@ -25,7 +25,7 @@ class _ConsultantPageState extends State<ConsultantPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Consultores'), actions: [
+      appBar: AppBar(title: Text('Consultores cadastrados'), actions: [
         GestureDetector(
           onTap: () {
             LoginService.logout().then((result) {

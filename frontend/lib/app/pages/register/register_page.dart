@@ -12,6 +12,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   RegisterFormTypes currentFormActive = RegisterFormTypes.Entrepreneur;
 
+  String imageUrl = 'assets/empreendedor.png';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   top: 10, left: 26, right: 26, bottom: 12),
               child: Column(
                 children: [
-                  Image.asset('assets/empreendedor.png', width: 180),
+                  Image.asset(imageUrl, width: 180),
                   SizedBox(height: 4),
                   Text(
                     'Tipo',
@@ -39,6 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         onChanged: (RegisterFormTypes value) {
                           setState(() {
                             currentFormActive = value;
+                            imageUrl = 'assets/empreendedor.png';
                           });
                         },
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -51,6 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         onChanged: (RegisterFormTypes value) {
                           setState(() {
                             currentFormActive = value;
+                            imageUrl = 'assets/consultor.png';
                           });
                         },
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

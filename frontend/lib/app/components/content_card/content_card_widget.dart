@@ -7,7 +7,7 @@ class ContentCardWidget extends StatelessWidget {
 
   ContentCardWidget(this.data)
       : _youtubeVideoController = YoutubePlayerController(
-          initialVideoId: data['youtubeCode'],
+          initialVideoId: YoutubePlayer.convertUrlToId(data['youtubeUrl']),
           flags: YoutubePlayerFlags(
             autoPlay: false,
           ),

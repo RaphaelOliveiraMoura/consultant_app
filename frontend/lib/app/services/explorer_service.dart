@@ -12,12 +12,9 @@ class ExplorerService {
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body).map((videoContent) {
-        String youtubeCode =
-            Uri.dataFromString(videoContent['youtubeUrl']).queryParameters['v'];
-
         return {
           'category': videoContent['consultant']['specialization'],
-          'youtubeCode': youtubeCode,
+          'youtubeUrl': videoContent['youtubeUrl'],
           'title': videoContent['title'],
           'description': videoContent['description']
         };

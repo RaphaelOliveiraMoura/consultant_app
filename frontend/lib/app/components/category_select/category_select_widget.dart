@@ -4,10 +4,15 @@ class CategorySelectWidget extends StatelessWidget {
   final value;
   final onChanged;
   final validator;
+  final label;
   final bool allOptions;
 
   CategorySelectWidget(
-      {this.value, this.onChanged, this.validator, this.allOptions = false});
+      {this.value,
+      this.onChanged,
+      this.validator,
+      this.allOptions = false,
+      this.label});
 
   final List<String> categoryOptions = [
     'Tecnologia',
@@ -31,8 +36,8 @@ class CategorySelectWidget extends StatelessWidget {
         value: value,
         decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-            labelText: "Categoria",
-            hintText: "Digite seu nome completo"),
+            labelText: label ?? "Categoria",
+            hintText: "Selecione a categoria"),
         items: categoryOptions.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,

@@ -28,7 +28,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Explorar'), actions: [
+      appBar: AppBar(title: Text('Explorar vídeos'), actions: [
         GestureDetector(
           onTap: () {
             LoginService.logout().then((result) {
@@ -49,6 +49,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
             child: Column(
               children: [
                 CategorySelectWidget(
+                    label: 'Pesquise a categoria desejada',
                     allOptions: true,
                     onChanged: (category) {
                       setState(() {
@@ -62,6 +63,17 @@ class _ExplorerPageState extends State<ExplorerPage> {
                             .toList();
                       });
                     }),
+                filteredList.length == 0
+                    ? Container(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 120),
+                            Image.asset('assets/caixa_vazia.png'),
+                            Text('Nenhum conteúdo encontrado')
+                          ],
+                        ),
+                      )
+                    : Container(),
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,

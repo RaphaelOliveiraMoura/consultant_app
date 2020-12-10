@@ -9,6 +9,7 @@ class ConsultantCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         margin: EdgeInsets.symmetric(vertical: 8),
+        color: Colors.grey[300],
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -35,8 +36,6 @@ class ConsultantCardWidget extends StatelessWidget {
                 Text(data['email']),
                 Text(data['specialization'],
                     style: TextStyle(color: Colors.grey)),
-                SizedBox(height: 8),
-                Icon(Icons.video_library)
               ])
             ],
           ),

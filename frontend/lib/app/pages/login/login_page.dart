@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextFormField(
                     onSaved: (value) => formData['email'] = value,
-                    validator: isRequired('Digite seu email corretamente'),
+                    validator: (value) => validateEmail(value),
                     textInputAction: TextInputAction.next,
                     onFieldSubmitted: (_) {
                       FocusScope.of(context).requestFocus(focus);
