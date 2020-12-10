@@ -21,9 +21,20 @@ class ContentCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                child: Text(data['category']),
-                margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8)),
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 8, left: 8, bottom: 4, right: 8),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(data['category']),
+                    Text(
+                      'Conteúdo publicado por: ${data['consultantName']}',
+                      style: TextStyle(color: Colors.grey, fontSize: 10),
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ]),
+            ),
             YoutubePlayer(
               controller: _youtubeVideoController,
               showVideoProgressIndicator: true,
@@ -50,7 +61,7 @@ class ContentCardWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
-            )
+            ),
           ],
         ));
   }

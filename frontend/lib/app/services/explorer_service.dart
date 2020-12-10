@@ -14,6 +14,7 @@ class ExplorerService {
       return jsonDecode(response.body).map((videoContent) {
         return {
           'category': videoContent['consultant']['specialization'],
+          'consultantName': videoContent['consultant']['name'],
           'youtubeUrl': videoContent['youtubeUrl'],
           'title': videoContent['title'],
           'description': videoContent['description']

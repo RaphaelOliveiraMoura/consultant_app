@@ -13,14 +13,24 @@ class _ExplorerPageState extends State<ExplorerPage> {
   List videoContentList = [];
   List filteredList = [];
 
+  bool loading = false;
+
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      loading = true;
+    });
 
     ExplorerService.getVideoContent().then((result) {
       setState(() {
         videoContentList = result;
         filteredList = result;
+      });
+    }).whenComplete(() {
+      setState(() {
+        loading = false;
       });
     });
   }
@@ -41,52 +51,54 @@ class _ExplorerPageState extends State<ExplorerPage> {
           ),
         )
       ]),
-      body: Container(
-        child: Container(
-          child: Padding(
-            padding:
-                const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
-            child: Column(
-              children: [
-                CategorySelectWidget(
-                    label: 'Pesquise a categoria desejada',
-                    allOptions: true,
-                    onChanged: (category) {
-                      setState(() {
-                        if (category == 'Todos') {
-                          filteredList = videoContentList;
-                          return;
-                        }
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 24, left: 26, right: 26, bottom: 12),
+                  child: Column(
+                    children: [
+                      CategorySelectWidget(
+                          label: 'Pesquise a categoria desejada',
+                          allOptions: true,
+                          onChanged: (category) {
+                            setState(() {
+                              if (category == 'Todos') {
+                                filteredList = videoContentList;
+                                return;
+                              }
 
-                        filteredList = videoContentList
-                            .where((data) => data['category'] == category)
-                            .toList();
-                      });
-                    }),
-                filteredList.length == 0
-                    ? Container(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 120),
-                            Image.asset('assets/caixa_vazia.png'),
-                            Text('Nenhum conteúdo encontrado')
-                          ],
+                              filteredList = videoContentList
+                                  .where((data) => data['category'] == category)
+                                  .toList();
+                            });
+                          }),
+                      filteredList.length == 0
+                          ? Container(
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 120),
+                                  Image.asset('assets/caixa_vazia.png'),
+                                  Text('Nenhum conteúdo encontrado')
+                                ],
+                              ),
+                            )
+                          : Container(),
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemBuilder: (ctx, index) =>
+                              ContentCardWidget(filteredList[index]),
+                          itemCount: filteredList.length,
                         ),
                       )
-                    : Container(),
-                Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (ctx, index) =>
-                        ContentCardWidget(filteredList[index]),
-                    itemCount: filteredList.length,
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

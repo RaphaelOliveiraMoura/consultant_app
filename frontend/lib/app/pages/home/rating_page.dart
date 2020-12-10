@@ -15,12 +15,23 @@ class _RatingPageState extends State<RatingPage> {
 
   List questions = [];
 
+  bool loading = false;
+
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      loading = true;
+    });
+
     RatingService.listRatings().then((result) {
       setState(() {
         questions = result;
+      });
+    }).whenComplete(() {
+      setState(() {
+        loading = false;
       });
     });
   }
@@ -42,37 +53,40 @@ class _RatingPageState extends State<RatingPage> {
           ),
         )
       ]),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (ctx, index) => RatingCardWidget(
-                    question: questions[index]['question'],
-                    initialRating: questions[index]['rating'],
-                    onRatingUpdate: (rating) {
-                      RatingService.rate(
-                              questionId: questions[index]['questionId'],
-                              rating: rating.toInt())
-                          .then((result) {
-                        final snackBar = SnackBar(
-                            content: Text('Resposta submetida com sucesso =)'),
-                            backgroundColor: Colors.green);
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (ctx, index) => RatingCardWidget(
+                          question: questions[index]['question'],
+                          initialRating: questions[index]['rating'],
+                          onRatingUpdate: (rating) {
+                            RatingService.rate(
+                                    questionId: questions[index]['questionId'],
+                                    rating: rating.toInt())
+                                .then((result) {
+                              final snackBar = SnackBar(
+                                  content:
+                                      Text('Resposta submetida com sucesso =)'),
+                                  backgroundColor: Colors.green);
 
-                        _scaffoldKey.currentState.showSnackBar(snackBar);
-                      });
-                    },
-                  ),
-                  itemCount: questions.length,
+                              _scaffoldKey.currentState.showSnackBar(snackBar);
+                            });
+                          },
+                        ),
+                        itemCount: questions.length,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

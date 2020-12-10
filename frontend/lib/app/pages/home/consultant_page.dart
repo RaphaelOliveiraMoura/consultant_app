@@ -1,3 +1,4 @@
+import 'package:consultant_app/app/components/category_select/category_select_widget.dart';
 import 'package:consultant_app/app/components/consultant_card/consultant_card_widget.dart';
 import 'package:consultant_app/app/services/consultant_service.dart';
 import 'package:consultant_app/app/services/login_service.dart';
@@ -10,14 +11,26 @@ class ConsultantPage extends StatefulWidget {
 
 class _ConsultantPageState extends State<ConsultantPage> {
   List consultants = [];
+  List filteredList = [];
+
+  bool loading = false;
 
   @override
   void initState() {
     super.initState();
 
+    setState(() {
+      loading = true;
+    });
+
     ConsultantService.getAll().then((result) {
       setState(() {
         consultants = result;
+        filteredList = result;
+      });
+    }).whenComplete(() {
+      setState(() {
+        loading = false;
       });
     });
   }
@@ -38,24 +51,42 @@ class _ConsultantPageState extends State<ConsultantPage> {
           ),
         )
       ]),
-      body: Container(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 24, left: 26, right: 26, bottom: 12),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (ctx, index) =>
-                      ConsultantCardWidget(consultants[index]),
-                  itemCount: consultants.length,
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 24, left: 26, right: 26, bottom: 12),
+                child: Column(
+                  children: [
+                    CategorySelectWidget(
+                        label: 'Pesquise a categoria desejada',
+                        allOptions: true,
+                        onChanged: (category) {
+                          setState(() {
+                            if (category == 'Todos') {
+                              filteredList = consultants;
+                              return;
+                            }
+
+                            filteredList = consultants
+                                .where((data) =>
+                                    data['specialization'] == category)
+                                .toList();
+                          });
+                        }),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (ctx, index) =>
+                            ConsultantCardWidget(filteredList[index]),
+                        itemCount: filteredList.length,
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            ),
     );
   }
 }

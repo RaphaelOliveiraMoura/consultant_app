@@ -65,7 +65,8 @@ class _RegisterEntrepreneurFormWidgetState
 
               await EntrepreneursService.create(formData);
 
-              Navigator.of(context).pop('Empreendedor criado com sucesso =)');
+              Navigator.of(context)
+                  .pop('Microempreendedor criado com sucesso =)');
             } on HttpError catch (e) {
               var errorsMapping = {
                 HttpErrorTypes.serverNotFound:

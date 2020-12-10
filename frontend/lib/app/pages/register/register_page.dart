@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
-                      Text('Empreendedor'),
+                      Text('Microempreendedor'),
                       SizedBox(width: 32),
                       Radio(
                         value: RegisterFormTypes.Consultant,
