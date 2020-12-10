@@ -16,6 +16,7 @@ class ContentCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        key: Key(data['youtubeUrl']),
         elevation: 1,
         margin: EdgeInsets.symmetric(vertical: 16),
         child: Column(
