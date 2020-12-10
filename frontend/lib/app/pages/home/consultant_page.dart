@@ -75,6 +75,17 @@ class _ConsultantPageState extends State<ConsultantPage> {
                                 .toList();
                           });
                         }),
+                    filteredList.length == 0
+                        ? Container(
+                            child: Column(
+                              children: [
+                                SizedBox(height: 120),
+                                Image.asset('assets/caixa_vazia.png'),
+                                Text('Nenhum consultor cadastrado no sistema')
+                              ],
+                            ),
+                          )
+                        : Container(),
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
